@@ -5,6 +5,8 @@ A simple Income and Expense system.
 
 ## How to run
 
+[assas](./Submit a job.md)
+
 To run Bestoon in development mode; Just use steps below:
 
 1. Install `python2`, `pip`, `virtualenv` in your system.
