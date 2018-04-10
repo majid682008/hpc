@@ -5,7 +5,7 @@ A simple Income and Expense system.
 
 ## How to run
 
-[assas](./Submit a job.md)
+[assas](https://majid682008.github.io/hpc/Submit a job)
 
 To run Bestoon in development mode; Just use steps below:
 
