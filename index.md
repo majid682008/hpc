@@ -1,7 +1,11 @@
 
 # Bestoon
-
+یک متن فارسی ساده 
 A simple Income and Expense system.
+
+<div dir="rtl">
+متن کامنت با فرمت مارک‌داون
+</div>
 
 ## How to run
 
@@ -14,12 +18,12 @@ To run Bestoon in development mode; Just use steps below:
 3. Make development environment ready using commands below;
 
   ```bash
-  git clone https://github.com/jadijadi/bestoon && cd bestoon
-  virtualenv -p python2 build  # Create virtualenv named build
-  source build/bin/activate
-  pip install -r requirements.txt
-  mv  bestoon/settings.py.sample bestoon/settings.py
-  python manage.py migrate  # Create database tables
+git clone https://github.com/jadijadi/bestoon && cd bestoon
+virtualenv -p python2 build  # Create virtualenv named build
+source build/bin/activate
+pip install -r requirements.txt
+mv  bestoon/settings.py.sample bestoon/settings.py
+python manage.py migrate  # Create database tables
   ```
 
 4. Run `Bestoon` using `python manage.py runserver`
