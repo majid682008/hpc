@@ -5,6 +5,7 @@ A simple Income and Expense system.
 
 <div dir="rtl">
 متن کامنت با فرمت مارک‌داون
+برای استفاده از این رفرمت `python manage.py test` باید از این استفاده کنید.
 </div>
 
 ## How to run
