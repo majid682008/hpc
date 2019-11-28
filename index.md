@@ -1,5 +1,6 @@
-
-# <p lang="fa" dir="rtl" align="right"> شروع یادگیری </p>
+<div dir="rtl">
+#  شروع یادگیری
+</div>
 یک متن فارسی ساده 
 A simple Income and Expense system.
 
