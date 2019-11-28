@@ -1,5 +1,5 @@
 
-# <p lang="fa" dir="rtl" align="right"> Bestoon </p>
+# <p lang="fa" dir="rtl" align="right"> شروع یادگیری </p>
 یک متن فارسی ساده 
 A simple Income and Expense system.
 
