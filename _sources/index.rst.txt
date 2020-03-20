@@ -1,0 +1,62 @@
+.. HPC documentation master file, created by
+   sphinx-quickstart on Sun Dec 29 10:48:13 2019.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+راهمنمای استفاده از خوشه محاسباتی دانشکده فیزیک، دانشگاه تهران
+==============================================================
+
+.. note:: این راهنما برای استفاده از خوشه محاسباتی ایجاد شده است و در حال تکمیل است ...
+
+معرفی:
+------
+
+سیستم‌ پردازشِ فوق سریع (High Performance Computing) دانشکده فیزیک، دانشگاه تهران بر پایه سیستم‌عامل لینوکس آماده سرویس‌دهی به جامعه دانشگاهی ایران می‌باشد. در حال حاضر، این خوشه محاسباتی دارای 5 ند محاسباتی، 200 پردازشگر و 640 گیگابایت رم (RAM) می‌باشد. همچنین هر ند دارای 40 هسته محاسباتی و 128 گیگابایت رم است.
+
+مشخصات سخت‌افزاری و نرم‌افزاری:
+-------------------------------
+
+- سیستم‌عامل: `rocks-cluster 6.1 <http://www.rocksclusters.org/>`_ 
+
+
+- سیستم مدیریت منابع: `PBS TORQUE <https://adaptivecomputing.com/cherry-services/torque-resource-manager>`_ 
+
+
+- 5 نود محاسباتی: هر نود از نوع Supermicro با 2 پردازش‌گر (Intel(R) Xeon(R) E5-2690 v2 @ 3.00GHz) و 128GB حافظه  از نوع 
+  (8x16 GB ECC DDR3) مجهز شده است.
+  
+- کامپایلرها: Intel compiler (Fortran, C/C++), GNU compilers (g77, gfortran, gcc), debugging (gdb, idb), Intel_MKL, Intel_MPI, Open_MI, Open_MP  
+
+- بارگزاری نرم‌افزارها: بارگذاری نرم‌افزارها با استفاده از `Environment Modules <https://modules.readthedocs.io/en/latest>`_ 
+
+
+هم اکنون امکان استفاده از این سامانه با همکاری `آزمایشگاه مرکزی پردیس علوم <https://www.sciencelabs.ir>`_ برای دانشجویان و اساتید دانشگاه تهران و همچنین سایر دانشگاه‌ها و شرکت‌های دانش‌بنیان فراهم شده‌است. برای اطلاعات بیشتر، به بخش `درخواست حساب کاربری <create_account.html>`_ مراجعه کنید.
+
+ - امیل سامانه برای ارتباط با مدیریت: ut.phys.hpc@gmail.com
+ - آدرس سامانه در آزمایشگاه مرکزی: `link <https://www.sciencelabs.ir/Services/detail/3009/%D8%B3%DB%8C%D8%B3%D8%AA%D9%85-%D9%BE%D8%B1%D8%AF%D8%A7%D8%B2%D8%B4-%D8%B3%D8%B1%DB%8C%D8%B9-%D8%AF%D8%A7%D9%86%D8%B4%DA%A9%D8%AF%D9%87-%D9%81%DB%8C%D8%B2%DB%8C%DA%A9>`_
+ - کانال اطلاع‌رسانی در تلگرام: `ut_phys_hpc@ <https://t.me/UT_Phys_HPC>`_
+ 
+
+.. toctree::
+   :maxdepth: 7
+   :caption: فهرست:
+
+   create_account
+   connecting
+   transfering_data
+   running_job
+   software_list
+   user_account
+   q_and_a
+
+.. image:: _static/hpc_featured.jpg
+
+
+
+
+اندیسک‌ها و جداول
+=================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

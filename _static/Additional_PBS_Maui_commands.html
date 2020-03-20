@@ -1,0 +1,24 @@
+<html>
+<head><title>Additional PBS/Maui commands</title></head>
+<body>
+<center>
+<h2><u>Additional PBS/Maui commands</u></h2>
+</center><br>
+<pre>
+Following are some useful commands that will help you monitor the available resources and your jobs:
+<ol>
+	<li><i>showq </i>: Detailed listing of running jobs, much like qstat.</li>
+	<li><i>qhost </i>: Show the status of nodes, queues, jobs. (not accurate) </li>
+	<li><i>showbf </i>: Shows resources available for immediate use.</li>
+	<li><i>showstart jobid </i>: Shows estimates of when job can/will start.</li>
+	<li><i>qdel -p jobid </i>: Will force purge the job if it is not killed by qdel. </li>
+	<li><i>checkjob jobid </i>: Will list job details. </li>
+	<li><i>qstat -f jobid </i>: List full information known about jobid. </li>
+	<li><i>qalter </i>: Alter the parameters of a job. Usually applies to a job that is in the Q state and you want to change values (like cpu-time, target nodes) before it runs. </li>
+	<li><i>qhold </i>: Put a hold on a job before it starts running (applies to job in Q state). </li>
+	<li><i>qrls </i>: Release hold on pbs batch jobs. </li>
+	<li><i>tracejob jobid </i>: Using it can help identify where, how, a why a job failed. </li>
+</ol>
+</pre>
+</body>
+</html>

@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fa">
+  <head>
+    <meta charset="utf-8" />
+    <title>اجرای برنامه &#8212; HPC  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="فهرست" href="genindex.html" />
+    <link rel="search" title="جستجو" href="search.html" />
+    <link rel="next" title="لیست نرم‌افزارهای نصب‌شده" href="software_list.html" />
+    <link rel="prev" title="انتقال فایل" href="transfering_data.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1><a class="toc-backref" href="#id12">اجرای برنامه</a><a class="headerlink" href="#id1" title="لینک ثابت به این سر مقاله">¶</a></h1>
+<div class="contents topic" id="id2">
+<p class="topic-title">محتوا</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id1" id="id12">اجرای برنامه</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id13">نمای کلی</a></p>
+<ul>
+<li><p><a class="reference internal" href="#jobfile" id="id14">ایجاد JOBFILE:</a></p></li>
+<li><p><a class="reference internal" href="#id7" id="id15">ارسال برنامه به صف:</a></p></li>
+<li><p><a class="reference internal" href="#cores" id="id16">تنظیم میزان هسته‌های موردنیاز (CORES):</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id10" id="id17">اجراهای سریال:</a></p></li>
+<li><p><a class="reference internal" href="#id11" id="id18">اجراهای موازی:</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#walltime" id="id19">تنظیم میزان زمان اجرای برنامه (WALLTIME):</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id13">نمای کلی</a><a class="headerlink" href="#id3" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<p>همه سرورهای محاسباتی برای اجرای برنامه‌های کاربران <code class="docutils literal notranslate"><span class="pre">(JOB)</span></code> از سیستم‌های مدیریت صف و منابع <code class="docutils literal notranslate"><span class="pre">(Job</span> <span class="pre">scheduler)</span></code> استفاده می‌کنند.
+از این برنامه برای ارسال برنامه‌های دسته‌ای     ، نظارت و همچنین مدیریت آنها استفاده می‌شود. برنامه‌های ارسالی کاربران بر روی نودهای محاسباتی اجرا می‌شوند، و نود اصلی تنها وظیفه مدیریت منابع و برنامه‌ها را بر عهده دارد. در خوشه محاسباتی ما، نرم‌افزار <code class="docutils literal notranslate"><span class="pre">PBS</span> <span class="pre">Torque</span></code> برای اینکار در نظر گرفته شده است. طرز کار <code class="docutils literal notranslate"><span class="pre">PBS</span></code> به صورت شماتیک در تصویر زیر نشان داده شده‌است.</p>
+<img alt="_images/pbs.JPG" src="_images/pbs.JPG" />
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>از اینجا به بعد به جای برنامه از واژه <code class="docutils literal notranslate"><span class="pre">JOB</span></code> استفاده خواهد شد و بیانگر برنامه‌ای است که کاربر قصد اجرای آن را دارد.</p>
+</div>
+<p>برای دسته‌بندی <code class="docutils literal notranslate"><span class="pre">JOB</span></code> های مختلف از صف‌های <code class="docutils literal notranslate"><span class="pre">(Queue)</span></code> مختلف استفاده می‌شود. صف‌های موجود در سیستم متفاوت هستند، اما همه به طور معمول محدودیت‌هایی در حداکثر زمان اجرا <code class="docutils literal notranslate"><span class="pre">(walltime)</span></code> و یا تعداد هسته‌های مجاز برای اجرا دارند. بعضی از صف‌ها ممکن است محدودیت‌های دیگری نیز داشته باشند و یا محدود به سرویس‌دهی به کاربران یا گروه‌های خاص باشند.</p>
+<div class="section" id="jobfile">
+<h3><a class="toc-backref" href="#id14">ایجاد JOBFILE:</a><a class="headerlink" href="#jobfile" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<p>برای اجرای برنامه ابتدا باید <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> مورد نظرتان را بسازید که نمونه‌ای از آن را در اینجا مشاهده می‌کنید. (این یک مثال ساده برای اجرای برنامه <code class="docutils literal notranslate"><span class="pre">LAMMPS</span></code> است.)</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#PBS -N Name</span>
+<span class="c1">#PBS -j eo</span>
+<span class="c1">#PBS -l nodes=1:ppn=20</span>
+<span class="c1">#PBS -l walltime=12:00:00</span>
+<span class="nb">cd</span> <span class="nv">$PBS_O_WORKDIR</span>
+
+module purge
+module load rocks-openmpi
+module load lammps/16Mar18_mpi
+mpirun -np <span class="m">20</span> lmp_mpi &lt; input.in &gt; out.log
+</pre></div>
+</div>
+<dl class="simple">
+<dt>این فایل شامل تمام درخواست‌های شما از منابع سیستم و همچنین دستوراتی که مایل به اجرای آن هستید است. مفسر شل، خط‌هایی که با هشتک <code class="docutils literal notranslate"><span class="pre">(#)</span></code> شروع می‌شوند را به عنوان دستور شل <code class="docutils literal notranslate"><span class="pre">(SHELL)</span></code> در نظر نمی‌گیرد. و کاربر آن را برای توضیحات وارد اسکریپت خود می‌کند. بنmodule purge</dt><dd><p>module load rocks-openmpiابراین تمام خطوطی که با <code class="docutils literal notranslate"><span class="pre">PBS#</span></code> شروع می‌شوند (خطوط قهوه‌ای رنگ)، به عنوان دستورات <code class="docutils literal notranslate"><span class="pre">PBS</span></code> در نظر گرفته‌شده و برای <code class="docutils literal notranslate"><span class="pre">SHELL</span></code> ناخوانا است.</p>
+</dd>
+</dl>
+<ol class="arabic simple">
+<li><p>خط اول، مشخص می‌کند که کدام پوسته استفاده خواهد شد. در این مثال از bash استفاده می‌شود؛ اما از csh یا سایر ‌پوسته‌ها نیز می‌توانید استفاده کنید.</p></li>
+<li><p>خط دوم، نام <code class="docutils literal notranslate"><span class="pre">JOB</span></code> ای که در سیستم صف اجرا می‌شود را مشخص می‌کند که در اینجا <code class="docutils literal notranslate"><span class="pre">Name</span></code> انتخاب شده است و شما باید با توجه برنامه‌ای که اجرا می‌کنید، یک نام با معنی انتخاب کنید. این کار برای تشخصیص <code class="docutils literal notranslate"><span class="pre">JOB</span></code> های مختلفی که همزمان اجرا می‌شود مفید است و باعث خوانایی در صف می‌شود.</p></li>
+<li><p>خط سوم، تعیین می‌کند خروجی دستورات و خطاهای برنامه را در فایلی به نام <code class="docutils literal notranslate"><span class="pre">Name.eID</span></code> قرار دهد که در واقع <code class="docutils literal notranslate"><span class="pre">log</span></code> آن است. (<code class="docutils literal notranslate"><span class="pre">Name</span></code> نام جابی است که در بالا تعیین کرده‌اید و <code class="docutils literal notranslate"><span class="pre">ID</span></code> نیز یک شناسه یکتا برای <code class="docutils literal notranslate"><span class="pre">JOB</span></code> است که در زمام ارسال به صف اختصاص داده می‌شود.) این فایل زمانی که در <code class="docutils literal notranslate"><span class="pre">JOB</span></code> خطایی رخ داده‌باشد، بسیار کارآمد است.</p></li>
+<li><p>خط چهام، تعداد نودها و پردازنده‌های مورد نظر برای اجرای این <code class="docutils literal notranslate"><span class="pre">JOB</span></code> را مشخص می‌کند. در این مثال، یک نود با 20 پردازنده درخواست شده‌است. (حتما توضیحات بیشتر را در این <a class="reference external" href="running_job.html#cores">قسمت</a> بخوانید.)</p></li>
+<li><p>خط پنجم، بیان می‌کند که چه میزان زمان برای اجرای این <code class="docutils literal notranslate"><span class="pre">JOB</span></code> درخواست شده‌است. در این مثال 12 ساعت درخواست شده‌است. اگر زمان اجرای <code class="docutils literal notranslate"><span class="pre">JOB</span></code> از این میزان که تعیین کرده‌اید بیشتر شود اجرای برنامه به صورت خودکار متوقف خواهد شد. (حتما توضیحات بیشتر را در این <a class="reference external" href="running_job.html#walltime">قسمت</a> بخوانید.)</p></li>
+<li><p>خط ششم، به <code class="docutils literal notranslate"><span class="pre">PBS</span></code> می‌گوید که به دایرکتوری که داده‌ها برای اجرای این برنامه در آن قرار دارد، دسترسی پیدا کنید. در این مثال، منظور از <code class="docutils literal notranslate"><span class="pre">PBS_O_WORKDIR$</span></code> پوشه‌ای است که <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> از آن به سیستم ارسال شده‌است. توجه کنید که این و تمام متغیرهایی که با <code class="docutils literal notranslate"><span class="pre">PBS$</span></code> شروع می‌شوند، به صورت خودکار توسط <code class="docutils literal notranslate"><span class="pre">PBS</span></code> ایجاد می‌شوند.</p></li>
+<li><p>خطوط بعدی در این مثال برای اجرای برنامه <code class="docutils literal notranslate"><span class="pre">LAMMPS</span></code> است و برای هر برنامه‌ای که اجرا می‌کنید متفاوت است. (توضیحات بیشتر را در این <a class="reference external" href="software_list.html">قسمت</a>  بخوانید.)</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">هشدار</p>
+<p>از تگ <code class="docutils literal notranslate"><span class="pre">cput</span></code> در <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> خود استفاده نکنید، زیرا در اجراهای موازی ایجاد مشکل خواهد کرد.</p>
+</div>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id15">ارسال برنامه به صف:</a><a class="headerlink" href="#id7" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<p>برای ارسال برنامه باید با توجه به دستورالعمل بالا یک <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> ایجاد کرده و در پوشه‌ای که می‌خواهیم برنامه داخل آن اجرا شود قرار بدهیم. بعد از آن وارد آن پوشه شده و با استفاده از دستور <code class="docutils literal notranslate"><span class="pre">qsub</span></code> فایل <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> را به سیستم صف ارسال می‌کنیم.</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>qsub run.job
+</pre></div>
+</div>
+<p>در اینجا اسم <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> من <code class="docutils literal notranslate"><span class="pre">run.job</span></code> است و این اسم اختیاری است و هر اسمی می‌تواند باشد. در صورت موفق بودن، سیستم یک <code class="docutils literal notranslate"><span class="pre">ID</span></code> منحصربه‌فرد به آن اختصاص داده و نمایش خواهد داد.</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span><span class="m">10</span>.head.cluster.ut.ac.ir
+</pre></div>
+</div>
+<p>در اینجا شماره <code class="docutils literal notranslate"><span class="pre">10</span></code> همان <code class="docutils literal notranslate"><span class="pre">ID</span></code> است.</p>
+<p>برای مشاهده وضعیت <code class="docutils literal notranslate"><span class="pre">JOB</span></code>، از دستور <code class="docutils literal notranslate"><span class="pre">qstat</span></code> استفاده کنید. خروجی این دستور به شکل زیر خواهد بود:</p>
+<img alt="_images/qstat01.png" src="_images/qstat01.png" />
+<p>چنان‌که درتصویر مشاهده می‌شود اطلاعات منابع استفاده شده توسط <code class="docutils literal notranslate"><span class="pre">JOB</span></code> و همچنین وضعیت و زمان اجرا را نشان می‌دهد. بخش مهم در خروجی این دستور، ستون دوم از آخر است که نشانگر وضعیعت <code class="docutils literal notranslate"><span class="pre">JOB</span></code> است و با <code class="docutils literal notranslate"><span class="pre">S</span></code> مشخص می‌شود. وضعیت <code class="docutils literal notranslate"><span class="pre">R</span></code> بیانگر در حال اجرا، وضعیت <code class="docutils literal notranslate"><span class="pre">C</span></code> بیانگر اتمام برنامه و وضعیت <code class="docutils literal notranslate"><span class="pre">Q</span></code> بیانگر این است که برنامه در صف قرار دارد.</p>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>اگر در <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> شما خطایی رخ داده باشد که منجر به قطع اجرای برنامه بشود، در این صورت نیز وضعیت <code class="docutils literal notranslate"><span class="pre">C</span></code> نشان داده خواهدشد و برای بررسی این موضع می‌توانید از <code class="docutils literal notranslate"><span class="pre">LOGFILE</span></code> ای که برای این <code class="docutils literal notranslate"><span class="pre">JOB</span></code> ایجاد شده است، استفاده کنید.</p>
+</div>
+<p>به منظور متوقف کردن <code class="docutils literal notranslate"><span class="pre">JOB</span></code> در حال اجرا یا منتظر در صف از دستور <code class="docutils literal notranslate"><span class="pre">qdel</span></code> استفاده می‌کنیم:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qdel</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>که در اینجا باید از <code class="docutils literal notranslate"><span class="pre">JOB</span> <span class="pre">ID</span></code> استفاده شود و همان شماره‌ای است که در دستور <code class="docutils literal notranslate"><span class="pre">qstat</span></code> مشخص می‌شود.</p>
+<p>همچنین می‌توانید دستورات بیشتر در رابطه با <code class="docutils literal notranslate"><span class="pre">PBS</span></code> و <code class="docutils literal notranslate"><span class="pre">maui</span></code> را در این <a class="reference external" href="_static/Additional_PBS_Maui_commands.html">لینک</a> مشاهده کنید.</p>
+</div>
+<div class="section" id="cores">
+<h3><a class="toc-backref" href="#id16">تنظیم میزان هسته‌های موردنیاز (CORES):</a><a class="headerlink" href="#cores" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<p>کاربران عزیر باید توجه داشته باشند که سیستم‌های پردازش سریع <code class="docutils literal notranslate"><span class="pre">(HPC)</span></code> از این جهت مورد استفاده محققین قرار می‌گیرند که می‌توانند همزمان تعداد زیادی هسته‌ محاسباتی را در اختیار آنان قرار دهند. بنابراین مهمترین مزیت استفاده از سیستم <code class="docutils literal notranslate"><span class="pre">HPC</span></code> همین موضوع است. بنابراین در این قسمت در این مورد بیشتر توضیح داده خواهد شد.</p>
+<p>برنامه‌های اجرای در کلاستر بنا به نحوه استفاده از هسته‌ها به دو دسته سریال و موازی طبقه بندی می‌شوند. اطلاعات بیشتر در این زمینه را از <a class="reference external" href="ـhttps://fa.wikipedia.org/wiki/%D8%B1%D8%A7%DB%8C%D8%A7%D9%86%D8%B4_%D9%85%D9%88%D8%A7%D8%B2%DB%8C">اینجا</a> بخوانید.</p>
+<div class="section" id="id10">
+<h4><a class="toc-backref" href="#id17">اجراهای سریال:</a><a class="headerlink" href="#id10" title="لینک ثابت به این سر مقاله">¶</a></h4>
+<p>برای اجرای یک برنامه سریال که بر روی یک هسته اجرا می‌شود باید تعداد هسته‌های درخواستی در <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> برابر با یک و همچنین تعداد نودها نیز باید یک باشد.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#PBS -l nodes=1:ppn=1</span>
+</pre></div>
+</div>
+<p>کاربران باید توجه داشته باشند که همزمان هر کاربر بیشتر از 10 <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> را همزمان نمی‌تواند اجرا کند. بنابراین اگر نیاز دارد تعداد بیشتری برنامه سریال را اجرا کند، بهتر است که آنها را در درون یک <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> قرار بدهد. یک مثال ساده از این نوع به شکل زیر است که در آن 5 برنامه سریال مختلف در 5 پوشه مختلف به صورت همزمان در یک <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> اجرا می‌شود:</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#PBS -N run_5in1</span>
+<span class="c1">#PBS -j eo</span>
+<span class="c1">#PBS -l nodes=1:ppn=5</span>
+<span class="c1">#PBS -l walltime=12:00:00</span>
+<span class="nb">cd</span> <span class="nv">$PBS_O_WORKDIR</span>
+
+<span class="c1"># Simple jobfile for running 5 serial programs in one jobfile.</span>
+<span class="nb">cd</span> folder1
+./exe1 <span class="o">&amp;&amp;</span>
+<span class="nb">cd</span> ../folder2
+./exe2 <span class="o">&amp;&amp;</span>
+<span class="nb">cd</span> ../folder3
+./exe3 <span class="o">&amp;&amp;</span>
+<span class="nb">cd</span> ../folder4
+./exe4 <span class="o">&amp;&amp;</span>
+<span class="nb">cd</span> ../folder5
+./exe5 <span class="o">&amp;&amp;</span>
+
+<span class="nb">wait</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>توجه داشته باشید که تعداد هسته‌های درخواستی در <code class="docutils literal notranslate"><span class="pre">ppn</span></code> را برابر با تعداد برنامه‌های در حال اجرا قرار داده و حتما از دستور <code class="docutils literal notranslate"><span class="pre">wait</span></code> در آخرین خط استفاده کنید.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>اگر کاربری قصد اجرای تعداد زیادی برنامه سریال را دارد، برای افزایش بهره‌وری سیستم،‌ پیشنهاد می‌شود که از روش اشاره‌شده در بالا استفاده کرده و همه را داخل یک <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> قرار دهد.</p>
+</div>
+</div>
+<div class="section" id="id11">
+<h4><a class="toc-backref" href="#id18">اجراهای موازی:</a><a class="headerlink" href="#id11" title="لینک ثابت به این سر مقاله">¶</a></h4>
+<p>برای اجرای یک برنامه به صورت موازی اصولا باید آن برنامه با الگوریتم موازی و یکی از روش‌های <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code>  یا <code class="docutils literal notranslate"><span class="pre">MPI</span></code> نوشته شده‌باشد. اطلاعات بیشتر در این زمینه را از
+<a class="reference external" href="https://en.wikipedia.org/wiki/OpenMP">OpenMP</a>
+و
+<a class="reference external" href="https://en.wikipedia.org/wiki/Message_Passing_Interface">MPI</a>
+بخوانید.</p>
+<p>کامپایل برنامه‌ای که در زبان <code class="docutils literal notranslate"><span class="pre">c++</span></code> به صورت <code class="docutils literal notranslate"><span class="pre">OpenMP</span></code> نوشته شده است، به صورت زیر است. (برای فرترن نیز همین گونه است.)</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>g++ -fopenmp omp_hello.cpp -o omp_hello.x
+</pre></div>
+</div>
+<p>و برای اجرا نیز <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> باید به صورت زیر باشد:</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#PBS -N run_OpenMP</span>
+<span class="c1">#PBS -j eo</span>
+<span class="c1">#PBS -l nodes=1:ppn=5</span>
+<span class="c1">#PBS -l walltime=12:00:00</span>
+<span class="nb">cd</span> <span class="nv">$PBS_O_WORKDIR</span>
+
+<span class="c1"># Simple jobfile for running openmp program with 5 cores.</span>
+<span class="nb">export</span> <span class="nv">OMP_NUM_THREADS</span><span class="o">=</span><span class="m">5</span>
+./omp_hello.x
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>توجه کنید تعداد هسته‌های درخواستی در <code class="docutils literal notranslate"><span class="pre">ppn</span></code> باید برابر با <code class="docutils literal notranslate"><span class="pre">OMP_NUM_THREADS</span></code> باشد.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>اگر نیاز به کاپایلر و یا ورژن خاصی دارید به این قسمت مراجعه کنید.</p>
+</div>
+<p>کامپایل برنامه‌ای که در زبان <code class="docutils literal notranslate"><span class="pre">c++</span></code> به صورت <code class="docutils literal notranslate"><span class="pre">MPI</span></code> نوشته شده است، به صورت زیر است. (برای فرترن نیز همین گونه است.)</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span>mpic++ omp_hello.cpp -o omp_hello.x
+</pre></div>
+</div>
+<p>و برای اجرا نیز <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> باید به صورت زیر باشد:</p>
+<div class="highlight-BASH notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#PBS -N run_MPI</span>
+<span class="c1">#PBS -j eo</span>
+<span class="c1">#PBS -l nodes=1:ppn=5</span>
+<span class="c1">#PBS -l walltime=12:00:00</span>
+<span class="nb">cd</span> <span class="nv">$PBS_O_WORKDIR</span>
+
+<span class="c1"># Simple jobfile for running MPI program with 5 cores.</span>
+module purge
+module load rocks-openmpi
+mpirun -np <span class="nv">$PBS_NP</span> --hostfile <span class="nv">$PBS_NODEFILE</span> ./omp_hello.x
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>توجه داشته‌باشید که متغیرهایی  <code class="docutils literal notranslate"><span class="pre">PBS_NP$</span></code> و <code class="docutils literal notranslate"><span class="pre">PBS_NODEFILE$</span></code> به صورت خودکار توسط <code class="docutils literal notranslate"><span class="pre">PBS</span></code> ایجاد می‌شوند و شما برای تعیین تعداد هسته‌ها برای اجرای <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> تنها باید در خط <code class="docutils literal notranslate"><span class="pre">PBS</span> <span class="pre">-l</span> <span class="pre">nodes=1:ppn=5</span></code> آن‌ها را تعیین کنید.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>توجه داشته‌باشید برای درخواست‌ اجرا در چند نود، تعداد کل هسته‌ها، حاصل‌ضرب <code class="docutils literal notranslate"><span class="pre">ppn</span></code> و <code class="docutils literal notranslate"><span class="pre">nodes</span></code> است  و در چنین اجراهایی حتما باید از تگ <code class="docutils literal notranslate"><span class="pre">hostfile</span> <span class="pre">$PBS_NODEFILE--</span></code> استفاده شود.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>توجه داشته‌باشید تعداد کل هسته‌های محاسباتی که هر کاربر به‌طور همزمان در کل اجراها، می‌تواند استفاده کند، 60 هسته است. بنابراین در یک <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> نباید بیشتر از 60 هسته درخواست کنید.</p>
+</div>
+</div>
+</div>
+<div class="section" id="walltime">
+<h3><a class="toc-backref" href="#id19">تنظیم میزان زمان اجرای برنامه (WALLTIME):</a><a class="headerlink" href="#walltime" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<p>سیستم مدیریت صف <code class="docutils literal notranslate"><span class="pre">PBS</span></code> با توجه به میزان منابع درخواستی من جمله تعداد پردازنده‌ها و هم چنین زمان انجام محاسبات، برنامه‌های ارسالی را اولویت‌بندی نموده و بر این اساس آن‌ها را برای اجرا به نود‌های اجرایی ارسال می‌کند. میزان زمان درخواستی برای اجرا، <code class="docutils literal notranslate"><span class="pre">walltime</span></code> نامیده می‌شود و هر چقدر کمتر باشد اولویت‌ بیشتری برای اجرا خواهد داشت. بنابراین با توجه به تخمینی که خودمان از برنامه داریم، باید حداقل زمان تخمینی را در <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> قرار دهیم تا اولویت اجرای <code class="docutils literal notranslate"><span class="pre">JOB</span></code> خود را بالا ببریم.</p>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>اگر مدت زمان اجرای برنامه از میزان <code class="docutils literal notranslate"><span class="pre">walltime</span></code> درخواستی ما  بیشتر شود، آن <code class="docutils literal notranslate"><span class="pre">JOB</span></code> به صورت خودکار متوقف خواهد شد.</p>
+</div>
+<p>با توجه به افزایش تعداد کاربران سیستم‌ پردازش فوق سریع دانشکده فیزیک و همچنین محدودیت منابع سیستم، نیاز به اعمال محدودیت در سیاست‌های اختصاص منابع سیستم، احساس می‌گردید. از این رو محدودیت‌هایی در <code class="docutils literal notranslate"><span class="pre">walltime</span></code> برنامه‌های اجرایی اعمال شده‌است که شامل موارد زیر است:</p>
+<ul class="simple">
+<li><p>میزان زمان <code class="docutils literal notranslate"><span class="pre">walltime</span></code> در صف <code class="docutils literal notranslate"><span class="pre">default</span></code> از 0 تا 72 ساعت.</p></li>
+<li><p>میزان زمان <code class="docutils literal notranslate"><span class="pre">walltime</span></code> در صف <code class="docutils literal notranslate"><span class="pre">stime</span></code> از 0 تا 4 ساعت. (با اولویت بالا)</p></li>
+<li><p>میزان زمان <code class="docutils literal notranslate"><span class="pre">walltime</span></code> در صف <code class="docutils literal notranslate"><span class="pre">ltime</span></code> از 100 تا 240 ساعت.</p></li>
+<li><p>میزان زمان <code class="docutils literal notranslate"><span class="pre">walltime</span></code> در صف <code class="docutils literal notranslate"><span class="pre">vltime</span></code> از 220 تا 1000 ساعت.</p></li>
+</ul>
+<p>در هنگام ارسال <code class="docutils literal notranslate"><span class="pre">JOB</span></code> به سیستم اگر نوع صف را مشخص نکنیم به صورت پیش‌فرض به صف <code class="docutils literal notranslate"><span class="pre">default</span></code> ارسال خواهد شد. بنابراین اگر نیاز به اجرای برنامه بیش از 72 داشته باشیم باید آن‌ها را به یکی از صف‌های ذکر شده در بالا ارسال کنیم. یعنی اگر زمان <code class="docutils literal notranslate"><span class="pre">walltime</span></code> تعیین شده در بازه تعیین شده آن صف مشخص قرار نگیرد، سیستم مانع از ارسال آن خواهد شد. به طور مثال اگر <code class="docutils literal notranslate"><span class="pre">walltime</span></code> بین  100 تا 240 ساعت باشد باید آن را به صف <code class="docutils literal notranslate"><span class="pre">ltime</span></code> به شکل زیر ارسال کنیم:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">qsub</span> <span class="n">run</span><span class="o">.</span><span class="n">job</span> <span class="o">-</span><span class="n">q</span> <span class="n">ltime</span>
+</pre></div>
+</div>
+<p>و یا از تک زیر در داخل <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> استفاده کنیم.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#PBS -q ltime</span>
+</pre></div>
+</div>
+<p>کاربران باید به این نکته توجه کنند که در صورت استفاده از صف‌های <code class="docutils literal notranslate"><span class="pre">ltime</span></code> و <code class="docutils literal notranslate"><span class="pre">vltime</span></code> امکان دارد مدت زمان بیشتری را نسبت به حالت عادی در صف منتظر بمانند.</p>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>در صورت استفاده از صف‌های <code class="docutils literal notranslate"><span class="pre">ltime</span></code> و <code class="docutils literal notranslate"><span class="pre">vltime</span></code> در هر <code class="docutils literal notranslate"><span class="pre">JOBFILE</span></code> بیشتر از 20 هسته محاسباتی نمی‌توانید استفاده کنید.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>اگر در زمان ارسال، میزان <code class="docutils literal notranslate"><span class="pre">walltime</span></code> درخواستی را تعیین نکنید، سیستم به صورت پیش‌فرض بیشترین زمان آن صف را در نظر خواهد گرفت.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>ناوبری</h3>
+<p class="caption"><span class="caption-text">فهرست:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="create_account.html">ایجاد حساب کاربری</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">اتصال به سرور</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfering_data.html">انتقال فایل</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">اجرای برنامه</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id3">نمای کلی</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#jobfile">ایجاد JOBFILE:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">ارسال برنامه به صف:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cores">تنظیم میزان هسته‌های موردنیاز (CORES):</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">اجراهای سریال:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">اجراهای موازی:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#walltime">تنظیم میزان زمان اجرای برنامه (WALLTIME):</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="software_list.html">لیست نرم‌افزارهای نصب‌شده</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_account.html">حساب کاربری</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="transfering_data.html" title="فصل قبلی">انتقال فایل</a></li>
+      <li>Next: <a href="software_list.html" title="فصل بعدی">لیست نرم‌افزارهای نصب‌شده</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">جستجو سریع</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="برو" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Majid Zeraati.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/running_job.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

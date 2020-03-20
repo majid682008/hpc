@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fa">
+  <head>
+    <meta charset="utf-8" />
+    <title>راهمنمای استفاده از خوشه محاسباتی دانشکده فیزیک، دانشگاه تهران &#8212; HPC  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="فهرست" href="genindex.html" />
+    <link rel="search" title="جستجو" href="search.html" />
+    <link rel="next" title="درخواست حساب کاربری" href="create_account.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1>راهمنمای استفاده از خوشه محاسباتی دانشکده فیزیک، دانشگاه تهران<a class="headerlink" href="#id1" title="لینک ثابت به این سر مقاله">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>این راهنما برای استفاده از خوشه محاسباتی ایجاد شده است و در حال تکمیل است ...</p>
+</div>
+<div class="section" id="id2">
+<h2>معرفی:<a class="headerlink" href="#id2" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<p>سیستم‌ پردازشِ فوق سریع (High Performance Computing) دانشکده فیزیک، دانشگاه تهران بر پایه سیستم‌عامل لینوکس آماده سرویس‌دهی به جامعه دانشگاهی ایران می‌باشد. در حال حاضر، این خوشه محاسباتی دارای 5 ند محاسباتی، 200 پردازشگر و 640 گیگابایت رم (RAM) می‌باشد. همچنین هر ند دارای 40 هسته محاسباتی و 128 گیگابایت رم است.</p>
+</div>
+<div class="section" id="id3">
+<h2>مشخصات سخت‌افزاری و نرم‌افزاری:<a class="headerlink" href="#id3" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<ul class="simple">
+<li><p>سیستم‌عامل: <a class="reference external" href="http://www.rocksclusters.org/">rocks-cluster 6.1</a></p></li>
+<li><p>سیستم مدیریت منابع: <a class="reference external" href="https://adaptivecomputing.com/cherry-services/torque-resource-manager">PBS TORQUE</a></p></li>
+<li><p>5 نود محاسباتی: هر نود از نوع Supermicro با 2 پردازش‌گر (Intel(R) Xeon(R) E5-2690 v2 &#64; 3.00GHz) و 128GB حافظه  از نوع
+(8x16 GB ECC DDR3) مجهز شده است.</p></li>
+<li><p>کامپایلرها: Intel compiler (Fortran, C/C++), GNU compilers (g77, gfortran, gcc), debugging (gdb, idb), Intel_MKL, Intel_MPI, Open_MI, Open_MP</p></li>
+<li><p>بارگزاری نرم‌افزارها: بارگذاری نرم‌افزارها با استفاده از <a class="reference external" href="https://modules.readthedocs.io/en/latest">Environment Modules</a></p></li>
+</ul>
+<p>هم اکنون امکان استفاده از این سامانه با همکاری <a class="reference external" href="https://www.sciencelabs.ir">آزمایشگاه مرکزی پردیس علوم</a> برای دانشجویان و اساتید دانشگاه تهران و همچنین سایر دانشگاه‌ها و شرکت‌های دانش‌بنیان فراهم شده‌است. برای اطلاعات بیشتر، به بخش <a class="reference external" href="create_account.html">درخواست حساب کاربری</a> مراجعه کنید.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>امیل سامانه برای ارتباط با مدیریت: <a class="reference external" href="mailto:ut&#46;phys&#46;hpc&#37;&#52;&#48;gmail&#46;com">ut<span>&#46;</span>phys<span>&#46;</span>hpc<span>&#64;</span>gmail<span>&#46;</span>com</a></p></li>
+<li><p>آدرس سامانه در آزمایشگاه مرکزی: <a class="reference external" href="https://www.sciencelabs.ir/Services/detail/3009/%D8%B3%DB%8C%D8%B3%D8%AA%D9%85-%D9%BE%D8%B1%D8%AF%D8%A7%D8%B2%D8%B4-%D8%B3%D8%B1%DB%8C%D8%B9-%D8%AF%D8%A7%D9%86%D8%B4%DA%A9%D8%AF%D9%87-%D9%81%DB%8C%D8%B2%DB%8C%DA%A9">link</a></p></li>
+<li><p>کانال اطلاع‌رسانی در تلگرام: <a class="reference external" href="https://t.me/UT_Phys_HPC">ut_phys_hpc&#64;</a></p></li>
+</ul>
+</div></blockquote>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">فهرست:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_account.html">درخواست حساب کاربری</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">اتصال به سرور</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html#ssh">اتصال از طریق پروتکل SSH:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="connecting.html#id3">پیش نیازها:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="connecting.html#id5">اتصال از طریق سیستم‌عامل لینوکس:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="connecting.html#id6">اتصال از طریق سیستم‌عامل ویندوز:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="transfering_data.html">انتقال فایل</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="transfering_data.html#id3">سیستم‌عامل لینوکس:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="transfering_data.html#scp">scp:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="transfering_data.html#filezilla">FileZilla:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="transfering_data.html#id5">سیستم‌عامل ویندوز:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transfering_data.html#id8">دانلود از اینترنت:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_job.html">اجرای برنامه</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_job.html#id3">نمای کلی</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="running_job.html#jobfile">ایجاد JOBFILE:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="running_job.html#id7">ارسال برنامه به صف:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="running_job.html#cores">تنظیم میزان هسته‌های موردنیاز (CORES):</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="running_job.html#id10">اجراهای سریال:</a></li>
+<li class="toctree-l4"><a class="reference internal" href="running_job.html#id11">اجراهای موازی:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="running_job.html#walltime">تنظیم میزان زمان اجرای برنامه (WALLTIME):</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="software_list.html">لیست نرم‌افزارهای نصب‌شده</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_account.html">حساب کاربری</a></li>
+<li class="toctree-l1"><a class="reference internal" href="q_and_a.html">سوالات متداول</a></li>
+</ul>
+</div>
+<img alt="_images/hpc_featured.jpg" src="_images/hpc_featured.jpg" />
+</div>
+</div>
+<div class="section" id="id6">
+<h1>اندیسک‌ها و جداول<a class="headerlink" href="#id6" title="لینک ثابت به این سر مقاله">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">فهرست</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">فهرست ماژول ها</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">صفحه جستجو</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="#">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>ناوبری</h3>
+<p class="caption"><span class="caption-text">فهرست:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="create_account.html">درخواست حساب کاربری</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">اتصال به سرور</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transfering_data.html">انتقال فایل</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_job.html">اجرای برنامه</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software_list.html">لیست نرم‌افزارهای نصب‌شده</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_account.html">حساب کاربری</a></li>
+<li class="toctree-l1"><a class="reference internal" href="q_and_a.html">سوالات متداول</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="create_account.html" title="فصل بعدی">درخواست حساب کاربری</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">جستجو سریع</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="برو" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Majid Zeraati.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

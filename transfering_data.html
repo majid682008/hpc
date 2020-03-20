@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fa">
+  <head>
+    <meta charset="utf-8" />
+    <title>انتقال فایل &#8212; HPC  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="فهرست" href="genindex.html" />
+    <link rel="search" title="جستجو" href="search.html" />
+    <link rel="next" title="اجرای برنامه" href="running_job.html" />
+    <link rel="prev" title="اتصال به سرور" href="connecting.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1><a class="toc-backref" href="#id9">انتقال فایل</a><a class="headerlink" href="#id1" title="لینک ثابت به این سر مقاله">¶</a></h1>
+<div class="contents topic" id="id2">
+<p class="topic-title">محتوا</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id1" id="id9">انتقال فایل</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id10">سیستم‌عامل لینوکس:</a></p>
+<ul>
+<li><p><a class="reference internal" href="#scp" id="id11">scp:</a></p></li>
+<li><p><a class="reference internal" href="#filezilla" id="id12">FileZilla:</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id5" id="id13">سیستم‌عامل ویندوز:</a></p></li>
+<li><p><a class="reference internal" href="#id8" id="id14">دانلود از اینترنت:</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>برای انتقال فایل‌ها بین رایانه شخصی و سرور باید از پروتکل <code class="docutils literal notranslate"><span class="pre">SSH</span></code> استفاده کرد. در این بخش در مورد انتقال فایل از رایانه‌ها با سیستم‌عامل لینوکس و ویندوز به سرور با استفاده از این پروتکل توضیح داده می‌شود.</p>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id10">سیستم‌عامل لینوکس:</a><a class="headerlink" href="#id3" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<div class="section" id="scp">
+<h3><a class="toc-backref" href="#id11">scp:</a><a class="headerlink" href="#scp" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<p>راحترین روش، استفاده از دستور <code class="docutils literal notranslate"><span class="pre">scp</span></code> است. از این دستور می ‌توانیم به راحتی، تنها با استفاده از یک ترمینال استفاده کنیم. با استفاده از این ابزار می‌توانید مجموعه فایل‌ها و پوشه‌ها را از یک هاست به هاست دیگری، با داشتن آدرس <code class="docutils literal notranslate"><span class="pre">IP</span></code> و اجازه دسترسی به آن منتقل کنید. شکل ظاهری آن به شکل زیر است:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="p">[[</span><span class="n">user</span><span class="o">@</span><span class="p">]</span><span class="n">host1</span><span class="p">:]</span><span class="n">file1</span> <span class="o">...</span> <span class="p">[[</span><span class="n">user</span><span class="o">@</span><span class="p">]</span><span class="n">host2</span><span class="p">:]</span><span class="n">file2</span>
+</pre></div>
+</div>
+<p>با استفاده از این دستور می‌توانید فایل‌ها را به سرور انتقال دهید و همچنین از سرور به رایانه خود منتقل کنید. مثال زیر انتقال یک پوشه از رایانه شخصی به سرور را نشان می‌دهد.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="n">my_folder</span> <span class="n">my_username</span><span class="o">@</span><span class="mf">172.16</span><span class="o">.</span><span class="mf">187.30</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">my_username</span><span class="o">/</span><span class="n">any_folder_path</span>
+</pre></div>
+</div>
+<p>برای انتقال فایل نیز، مشابه مثال بالا است و تنها تگ <code class="docutils literal notranslate"><span class="pre">r-</span></code> اجباری نیست. مثال دیگر انتقال یک پوشه از سرور به رایانه شخصی را نشان می‌دهد.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scp</span> <span class="o">-</span><span class="n">r</span> <span class="n">my_username</span><span class="o">@</span><span class="mf">172.16</span><span class="o">.</span><span class="mf">187.30</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">my_username</span><span class="o">/</span><span class="n">my_folder</span> <span class="n">any_folder_path</span>
+</pre></div>
+</div>
+<p>چنان‌چه متوجه شدید، تنها مکان مبدا و مقصد در دستور بالا جابه‌جا شده‌است. در واقع در این دستور، اول باید مبدا و سپس مقصد مشخص تعین شود.</p>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>فایل‌های لوکال باید با استفاده از یک مسیر مطلق یا نسبی مشخص شوند در حالی که نام فایل‌های راه دور باید مشخصات کاربر و میزبان را شامل شود.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>برای انتقال فایل‌های بزرگ بهتر است دستور <code class="docutils literal notranslate"><span class="pre">scp</span></code> را در درون یک <a class="reference external" href="https://linuxize.com/post/how-to-use-linux-screen">session</a> اجرا کنید.</p>
+</div>
+</div>
+<div class="section" id="filezilla">
+<h3><a class="toc-backref" href="#id12">FileZilla:</a><a class="headerlink" href="#filezilla" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<p>نرم‌افزار <a class="reference external" href="https://filezilla-project.org">FileZilla</a> منبع‌باز و رایگان است که در سیستم‌عامل‌های <code class="docutils literal notranslate"><span class="pre">Windows</span></code>, <code class="docutils literal notranslate"><span class="pre">Linux</span></code>, <code class="docutils literal notranslate"><span class="pre">Mac</span></code> قابل اجراست. بعد از نصب، نرم‌افزار را اجر کرده. ابتدا مطابق شکل زیر برروی <code class="docutils literal notranslate"><span class="pre">Edit</span></code> سپس <code class="docutils literal notranslate"><span class="pre">Settings</span></code> کلیک کرده، پنجره <code class="docutils literal notranslate"><span class="pre">Settings</span></code> باز خواهد شد. در قسمت <code class="docutils literal notranslate"><span class="pre">Passive</span> <span class="pre">Mode</span></code>، قسمت <code class="docutils literal notranslate"><span class="pre">Use</span> <span class="pre">the</span> <span class="pre">server's</span> <span class="pre">external</span> <span class="pre">IP</span> <span class="pre">address</span></code> را انتخاب و سپس <code class="docutils literal notranslate"><span class="pre">Ok</span></code> کنید.</p>
+<img alt="_images/filezilla.png" src="_images/filezilla.png" />
+<p>حال می‌توانید از نرم‌افزار استفاده کنید. مقدار <code class="docutils literal notranslate"><span class="pre">Host</span></code> را  <code class="docutils literal notranslate"><span class="pre">172.16.187.30</span></code> قرار داده و <code class="docutils literal notranslate"><span class="pre">username</span></code> و <code class="docutils literal notranslate"><span class="pre">password</span></code> خود را وارد کنید. همچنین مقدار <code class="docutils literal notranslate"><span class="pre">Port</span></code> را 22 قرار داده و  بر روی <code class="docutils literal notranslate"><span class="pre">Quickconnect</span></code> کلیک کنید. در سمت راست صفحه نمایش، پوشه <code class="docutils literal notranslate"><span class="pre">HOME</span></code> سرور نشان داده خواهدشد که شما می‌توانید، فایل‌های خود را به روش <code class="docutils literal notranslate"><span class="pre">Drag</span> <span class="pre">&amp;</span> <span class="pre">Drop</span></code> را داخل آن قرار داده و یا از آن بردارید.</p>
+<img alt="_images/filezilla2.png" src="_images/filezilla2.png" />
+</div>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id13">سیستم‌عامل ویندوز:</a><a class="headerlink" href="#id5" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<p>در سیستم‌عامل ویندوز می‌توانید از نرم‌افزار <a class="reference external" href="https://filezilla-project.org">FileZilla</a> با استفاده از روش توضیح داده شده در <a class="reference external" href="transfering_data.html#filezilla">بالا</a> استفاده کنید.</p>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id14">دانلود از اینترنت:</a><a class="headerlink" href="#id8" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<p>کاربران باید توجه کنند که <code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">node</span></code> سرور به اینترنت وصل نیست و در نتیجه امکان دانلود مستقیم هیچ فایلی وجود ندارد. اگر نیاز به فایل و یا <code class="docutils literal notranslate"><span class="pre">source</span></code> برنامه خاصی از اینترنت دارید، باید ابتدا آن را بر روی رایانه‌شخصی خود دانلود کرده و سپس با استفاده از روش‌های اشاره شده در قسمت بالا به سرور انتقال دهید.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>ناوبری</h3>
+<p class="caption"><span class="caption-text">فهرست:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="create_account.html">درخواست حساب کاربری:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connecting.html">اتصال به سرور</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">انتقال فایل</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id3">سیستم‌عامل لینوکس:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#scp">scp:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#filezilla">FileZilla:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">سیستم‌عامل ویندوز:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">دانلود از اینترنت:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_job.html">اجرای برنامه</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software_list.html">لیست نرم‌افزارهای نصب‌شده</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_account.html">حساب کاربری</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="connecting.html" title="فصل قبلی">اتصال به سرور</a></li>
+      <li>Next: <a href="running_job.html" title="فصل بعدی">اجرای برنامه</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">جستجو سریع</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="برو" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Majid Zeraati.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/transfering_data.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

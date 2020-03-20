@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fa">
+  <head>
+    <meta charset="utf-8" />
+    <title>اتصال به سرور &#8212; HPC  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="index" title="فهرست" href="genindex.html" />
+    <link rel="search" title="جستجو" href="search.html" />
+    <link rel="next" title="انتقال فایل" href="transfering_data.html" />
+    <link rel="prev" title="ایجاد حساب کاربری" href="create_account.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="id1">
+<h1><a class="toc-backref" href="#id9">اتصال به سرور</a><a class="headerlink" href="#id1" title="لینک ثابت به این سر مقاله">¶</a></h1>
+<div class="contents topic" id="id2">
+<p class="topic-title">محتوا</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id1" id="id9">اتصال به سرور</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ssh" id="id10">اتصال از طریق پروتکل SSH:</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id11">پیش نیازها:</a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id12">اتصال از طریق سیستم‌عامل لینوکس:</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id13">اتصال از طریق سیستم‌عامل ویندوز:</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="ssh">
+<h2><a class="toc-backref" href="#id10">اتصال از طریق پروتکل SSH:</a><a class="headerlink" href="#ssh" title="لینک ثابت به این سر مقاله">¶</a></h2>
+<p>دسترسی به ماشین‌های محاسباتی از راه دور به یک ضرورت تبدیل شده‌است و به سختی می‌توان تصور کرد که نتوانیم این ماشین‌ها را از مکانهای دور کنترل کنیم. بسته به سیستم‌عامل در حال اجرا، راه‌های زیادی برای برقراری ارتباط با یک دستگاه از راه دور وجود دارد، اما یک پروتکل پرکاربرد برای سیستم‌عامل‌های بر پایه لینوکس، Secure Shell (SSH) است.</p>
+<p>این پروتکل از برنامه‌های مشتری و سرور برای ایجاد ارتباط از راه دور استفاده می‌کند. این ابزار به شما امکان می دهد با استفاده از یک رایانه شخصی به سایر رایانه‌ها از راه دور دسترسی پیدا کرده و آن‌ها را مدیریت کرده، فایل‌ها را انتقال داده و هر کاری را که در حالت حضور فیزیکی در مقابل رایانه انجام می‌دادید را از راه دور انجام دهید.</p>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id11">پیش نیازها:</a><a class="headerlink" href="#id3" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<p>قبل از اتصال از طریق پروتکل <code class="docutils literal notranslate"><span class="pre">SSH</span></code> با یک ماشین از راه دور ، چند مورد اساسی باید رعایت شود:</p>
+<ul class="simple">
+<li><p>کامپیوتر از راه دور (سرور) باید همیشه روشن باشد و اتصال شبکه‌ای داشته باشد.</p></li>
+<li><p>برنامه های مشتری و سرور باید بروی رایانه شما و سرور نصب و فعال شوند.</p></li>
+<li><p>به آدرس IP یا نام دستگاه از راه دور که می‌خواهید به آن وصل شوید نیاز دارید.</p></li>
+<li><p>برای دسترسی به رایانه از راه دور باید مجوزهای لازم را داشته باشید.</p></li>
+<li><p>تنظیمات فایروال برای اتصال از راه دور در رایانه شخصی و سرور انجام شده باشد.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>چنانچه از اینترنت داخلی دانشگاه تهران به هنگام اتصال استفاده نمی‌کنید به دلیل وجود فایروال شما اجازه دسترسی نداشته و باید از سرویس <a class="reference external" href="https://ithelp.ut.ac.ir/fa/news/3150/%D8%A8%D8%A7-%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D9%87-%D8%A7%D8%B2-utvpn-%D9%85%DB%8C-%D8%AA%D9%88%D8%A7%D9%86%DB%8C%D8%AF-%D8%A8%DB%8C%D8%B1%D9%88%D9%86-%D8%A7%D8%B2-%D8%AF%D8%A7%D9%86%D8%B4%DA%AF%D8%A7%D9%87-%D8%A8%D9%87-%D9%85%D9%86%D8%A7%D8%A8%D8%B9-%D8%B9%D9%84%D9%85%DB%8C-%D9%88-%D8%B3%D8%A7%D9%85%D8%A7%D9%86%D9%87-%D9%87%D8%A7%DB%8C-%D8%AF%D8%A7%D8%AE%D9%84%DB%8C-%D8%AF%D8%B3%D8%AA%D8%B1%D8%B3%DB%8C-%D8%AF%D8%A7%D8%B4%D8%AA%D9%87-%D8%A8%D8%A7%D8%B4%DB%8C%D8%AF.">UTVPN</a>  استفاده کنید. برای دریافت اطلاعات بیشتر در این زمینه بروی این <a class="reference external" href="https://ithelp.ut.ac.ir/fa/news/3427/%D8%A2%D9%85%D9%88%D8%B2%D8%B4-%D8%B3%D8%A7%D8%AE%D8%AA-%DA%A9%D8%A7%D9%86%DA%A9%D8%B4%D9%86-utvpn">لینک</a>  کلیک کنید</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>چنانچه از دانشجویان و یا اساتید دانشگاه  تهران نیستید باید به صورت جداگانه درخواست دسترسی به UTVPN را ارسال کنید. برای این منظور، باید فرم <a class="reference external" href="_static/VPN.pdf">PDF</a>  را پرکرده و برای مدیریت  کلاستر به صورت امیل با عنوان UTVPN ارسال کنید.</p>
+</div>
+<p>برای اتصال به سرور می‌توانید از سیستم‌عامل‌ لینوکس و یا ویندوز استفاده کنید که به تفظیل در زیر اشاره شده‌است.</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id12">اتصال از طریق سیستم‌عامل لینوکس:</a><a class="headerlink" href="#id5" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<p>برای ایجاد اتصال <code class="docutils literal notranslate"><span class="pre">SSH</span></code> به یک مشتری <code class="docutils literal notranslate"><span class="pre">(SSH</span> <span class="pre">Client)</span></code> نصب شده نیاز دارید. ابزار <code class="docutils literal notranslate"><span class="pre">SSH</span></code> با منبع باز - که به طور گسترده برای توزیع های لینوکس استفاده می شود - <code class="docutils literal notranslate"><span class="pre">OpenSSH</span></code> است. نصب و استفاده از <code class="docutils literal notranslate"><span class="pre">OpenSSH</span></code> بسیار آسان است. تنها نیاز به دسترسی به یک ترمینال بروی رایانه‌ای که برای اتصال از آن استفاده می‌کنید ، دارید. بسیاری از توزیع های لینوکس به صورت پیش‌فرض  نسخه مشتری <code class="docutils literal notranslate"><span class="pre">SSH</span></code>  را دارند. برای بررسی اینکه <code class="docutils literal notranslate"><span class="pre">SSH</span></code> در سیستم مبتنی بر لینوکس شما موجود است یا نه، باید:</p>
+<ol class="arabic simple">
+<li><p>یک ترمینال باز کنید. می توانید &quot;terminal&quot; را جستجو کنید یا <code class="docutils literal notranslate"><span class="pre">CTRL+ALT+T</span></code> را روی صفحه کلید خود فشار دهید.</p></li>
+<li><p>در ترمینال <code class="docutils literal notranslate"><span class="pre">ssh</span></code> را تایپ کرده و <code class="docutils literal notranslate"><span class="pre">Enter</span></code> را در فشار دهید.</p></li>
+<li><p>اگر <code class="docutils literal notranslate"><span class="pre">SSH</span> <span class="pre">Client</span></code> نصب باشد، پاسخی  به صورت زیر دریافت خواهید کرد:</p></li>
+</ol>
+<img alt="_images/ssh.png" src="_images/ssh.png" />
+<p>این بدان معناست که بر روی رایانه‌ شما نصب است. در غیر این صورت، شما باید آن را نصب کنید. دستور زیر را برای نصب بر روی رایانه خود اجرا کنید:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get update
+sudo apt-get install openssh-client
+</pre></div>
+</div>
+<p>اکنون می‌توانید از <code class="docutils literal notranslate"><span class="pre">SSH</span></code> برای اتصال به هر ماشین یا سرور، به شرط داشتن امتیازات لازم برای دسترسی، و همچنین نام میزبان یا آدرس IP استفاده کنید. برای اتصال یک ترمینال باز کرده و دستور زیر را وارد کنید. توجه داشته باشید که <code class="docutils literal notranslate"><span class="pre">host_ip_address</span></code> برای هر ماشین مجزا است و برای سرور محاسباتی ما <code class="docutils literal notranslate"><span class="pre">172.16.187.30</span></code> است.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh your_username@host_ip_address
+</pre></div>
+</div>
+<p>گذرواژه خود را وارد کرده و Enter را بزنید. توجه داشته باشید که هنگام تایپ کردن گذرواژه هیچ بازخوردی روی صفحه دریافت نمی‌کنید. هنگامی که برای اولین بار به سرور وصل می‌شوید ، از شما سؤال می‌کند که آیا می‌خواهید اتصال خود را ادامه دهید. فقط <code class="docutils literal notranslate"><span class="pre">yes</span></code> را تایپ کنید و Enter را بزنید. این پیام فقط اولین‌بار ظاهر می‌شود زیرا سرور از راه دور در دستگاه محلی شما مشخص نشده‌است. در نهایت در صورت اتصال موفق پیامی به شکل زیر به کاربر نشان داده‌ خواهد شد که بیانگر اطلاعات کاربر و میزان مصرف آن است.</p>
+<img alt="_images/loggin_massage.png" src="_images/loggin_massage.png" />
+<p>اکنون می‌توانید از سروری که از راه دور وصل شده‌اید، استفاده کنید. اگر در اتصال به سرور از راه دور مشکلی دارید، اطمینان حاصل کنید که:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>آدرس IP سرور صحیح است.</p></li>
+<li><p>نام‌کاربری و گذرواژه شما صحیح است.</p></li>
+<li><p>به شبکه داخلی دانشگاه وصل هستید.</p></li>
+<li><p>نرم افزار SSH به درستی نصب شده‌است.</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id13">اتصال از طریق سیستم‌عامل ویندوز:</a><a class="headerlink" href="#id6" title="لینک ثابت به این سر مقاله">¶</a></h3>
+<p>برای اتصال به سرور احتیاج به نصب نرم‌افزارهای مناسب مانند <code class="docutils literal notranslate"><span class="pre">putty</span></code> و یا <code class="docutils literal notranslate"><span class="pre">SSH</span> <span class="pre">Secure</span> <span class="pre">Shell</span></code> دارید. در ادامه چگونگی اتصال با استفاده از این نرم‌افزارها توضیح داده می‌شود.</p>
+<div class="admonition note">
+<p class="admonition-title">توجه</p>
+<p>نرم‌افزارهای بسیاری برای اتصال از طریق <code class="docutils literal notranslate"><span class="pre">SSH</span></code> برای ویندوز وجود دارند ولی ما به دلیل رایگان بودن این‌ دو را بیان کردیم. لیست بیشتری از نرم‌افزارهای مناسب برای این کار را در این <a class="reference external" href="https://www.slant.co/topics/149/~best-ssh-clients-for-windows">لینک</a>  می‌توانید پیدا کنید.</p>
+</div>
+<ul class="simple">
+<li><p>Putty</p></li>
+</ul>
+<p>ابتدا برای اتصال به <code class="docutils literal notranslate"><span class="pre">SSH</span></code> از طریق ویندوز نرم افزار رایگان <a class="reference external" href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">Putty</a>  را دانلود کنید. نرم افزار را باز کنید. آدرس IP را در کادر <code class="docutils literal notranslate"><span class="pre">(Host</span> <span class="pre">Name</span> <span class="pre">(or</span> <span class="pre">IP</span> <span class="pre">Address</span></code> و پرت اتصال به <code class="docutils literal notranslate"><span class="pre">SSH</span></code> (بطور پیشفرض پرت 22 می باشد) را در کادر Port وارد نموده و با کلیک بر روی open وارد قسمت ترمینال نرم افزار شوید. توجه داشته باشید که <code class="docutils literal notranslate"><span class="pre">IP</span> <span class="pre">Address</span></code> برای هر ماشین مجزا است و برای سرور محاسباتی ما <code class="docutils literal notranslate"><span class="pre">172.16.187.30</span></code> است.</p>
+<img alt="_images/putty1.png" src="_images/putty1.png" />
+<p>در این مرحله باید نام‌کاربری را وارد کنید پس از وارد نمودن کلمه‌عبور دکمه Enter را فشار دهید. سپس از شما گذرواژه سوال می شود که با تایپ گذرواژه و زدن دکمه Enter به سرور متصل می‌شوید. توجه داشته باشید که هنگام تایپ کردن گذرواژه، هیچ بازخوردی روی صفحه دریافت نمی‌کنید.</p>
+<img alt="_images/putty2.jpg" src="_images/putty2.jpg" />
+<p>در نهایت در صورت اتصال موفق پیامی به شکل زیر به کاربر نشان داده‌ خواهد شد که بیانگر اطلاعات کاربر و میزان مصرف آن است.</p>
+<img alt="_images/loggin_massage.png" src="_images/loggin_massage.png" />
+<p>اکنون می‌توانید به سرور از راه دور وصل شده و از آن استفاده کنید. اگر در اتصال به سرور از راه دور مشکلی دارید ، اطمینان حاصل کنید که:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>آدرس IP سرور صحیح است.</p></li>
+<li><p>نام کاربری و رمز عبور شما صحیح است.</p></li>
+<li><p>به شبکه داخلی دانشگاه وصل هستید.</p></li>
+<li><p>نرم افزار SSH به درستی نصب شده است.</p></li>
+</ol>
+</div></blockquote>
+<ul class="simple">
+<li><p>SSH Secure Shell</p></li>
+</ul>
+<p>ابتدا این نرم‌افزار را از این <a class="reference external" href="http://www2.ohlone.edu/downloads/SSHSecureShellClient-3.2.9.exe">لینک</a>  دانلود کرده و پس از نصب آن را اجرا کنید. آیکون <code class="docutils literal notranslate"><span class="pre">Quick</span> <span class="pre">Connect</span></code> را کلیک کرده، پنجره‌ای باز می‌شود. در قسمت <code class="docutils literal notranslate"><span class="pre">Host</span> <span class="pre">Name</span></code>، آدرس <code class="docutils literal notranslate"><span class="pre">172.16.187.30</span></code> و در قسمت <code class="docutils literal notranslate"><span class="pre">User</span> <span class="pre">Name</span></code>، نام‌کاربری را وارد کنید. قسمت‌های دیگر از جمله <code class="docutils literal notranslate"><span class="pre">Port</span> <span class="pre">Number</span></code> (که مقدار آن 22 است) تغییری ندهید.</p>
+<p>بعد از کلیک <code class="docutils literal notranslate"><span class="pre">Connect</span></code>، پنجره‌ای باز می‌شود، <code class="docutils literal notranslate"><span class="pre">Yes</span></code> را کلیک و گذرواژه را وارد کنید.</p>
+<img alt="_images/ssh.secure.shell-0.jpg" src="_images/ssh.secure.shell-0.jpg" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>END!
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="index.html">
+    <img class="logo" src="_static/logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>ناوبری</h3>
+<p class="caption"><span class="caption-text">فهرست:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="create_account.html">ایجاد حساب کاربری</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">اتصال به سرور</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ssh">اتصال از طریق پروتکل SSH:</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">پیش نیازها:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">اتصال از طریق سیستم‌عامل لینوکس:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">اتصال از طریق سیستم‌عامل ویندوز:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="transfering_data.html">انتقال فایل</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_job.html">اجرای برنامه</a></li>
+<li class="toctree-l1"><a class="reference internal" href="software_list.html">لیست نرم‌افزارهای نصب‌شده</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_account.html">حساب کاربری</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="create_account.html" title="فصل قبلی">ایجاد حساب کاربری</a></li>
+      <li>Next: <a href="transfering_data.html" title="فصل بعدی">انتقال فایل</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">جستجو سریع</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="برو" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Majid Zeraati.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/connecting.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
